@@ -1,0 +1,9 @@
+- [x] Create logic function
+- [x] Test logic function
+- [x] Add leaderboard
+- [x] Persist leaderboard
+- [x] Create PvP mode
+- [x] Create PvC mode
+- [ ] Make the computer choose based on the players previous moves
+- [ ] Add a message to the win dialog about the winning move
+- [ ] Add animations when both players have selected
