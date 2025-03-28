@@ -1,15 +1,13 @@
-import { leaderboardStore } from "@/utils/game-store";
-import { createFileRoute } from "@tanstack/react-router";
-import { useSelector } from "@xstate/store/react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useLeaderboardStore } from "@/utils/leaderboard-store";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/leaderboard")({
   component: RouteComponent,
@@ -27,7 +25,7 @@ function RouteComponent() {
 }
 
 function LeaderBoard() {
-  const leaderboard = useSelector(leaderboardStore, (state) => state.context);
+  const leaderboard = useLeaderboardStore((state) => state.board);
   const sortedLeaderboard = Object.entries(leaderboard).sort(
     ([, scoreA], [, scoreB]) => scoreB - scoreA,
   );

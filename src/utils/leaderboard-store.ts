@@ -1,17 +1,32 @@
-import { createStore } from "@xstate/store";
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
-export const leaderboardStore = createStore({
-  context: {
-    SuperCoolGuy: 10,
-    anotherUser: 5,
-    "ME!!": 2,
-  } as Record<string, number>,
-  on: {
-    inc: (context, event: { username: string }) => ({
-      ...context,
-      [event.username]: context[event.username]
-        ? context[event.username] + 1
-        : 0,
-    }),
-  },
-});
+type LeaderboardState = {
+  board: Record<string, number>;
+  addScore: (username: string, score?: number) => void;
+};
+
+export const useLeaderboardStore = create<LeaderboardState>()(
+  devtools(
+    persist(
+      (set) => ({
+        board: {
+          SuperCoolGuy: 10,
+          anotherUser: 5,
+          "ME!!": 2,
+        },
+        addScore: (username: string, score = 1) =>
+          set((state) => ({
+            ...state,
+            board: {
+              ...state.board,
+              [username]: (state.board[username] || 0) + score,
+            },
+          })),
+      }),
+      {
+        name: "leaderboard-store",
+      },
+    ),
+  ),
+);
