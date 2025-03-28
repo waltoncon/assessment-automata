@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { getRandomHand, Hand, hands } from "./hand";
-import winLogic from "./win-logic";
+import { getRandomHand, Hand } from "./hand";
 import { useLeaderboardStore } from "./leaderboard-store";
+import winLogic from "./win-logic";
 
 export const computer = Symbol("computer-player");
 
@@ -10,8 +10,8 @@ export type Player = "player1" | "player2";
 export type Result = Player | "draw";
 
 interface GameState {
-  player1?: { name: string; hand?: Hand };
-  player2?: { name: string | symbol; hand?: Hand };
+  player1?: { name: string; hand?: Hand; score?: number };
+  player2?: { name: string | symbol; hand?: Hand; score?: number };
   result?: Result;
   playerChoose: (player: Player, hand: string) => void;
   setPlayers: (player1: string, player2?: string) => void;
@@ -23,8 +23,8 @@ interface GameState {
 
 export const useGameStore = create<GameState>()(
   devtools((set, get) => ({
-    player1: { name: "Someone" },
-    player2: { name: "Other" },
+    player1: undefined,
+    player2: undefined,
     result: undefined,
     playerChoose(player, hand) {
       console.log("playerChoose", player, hand);
@@ -61,6 +61,14 @@ export const useGameStore = create<GameState>()(
         console.log("result", result, name);
 
         useLeaderboardStore.getState().addScore(name, 1);
+
+        set((state) => ({
+          ...state,
+          [result]: {
+            ...state[result],
+            score: (state[result]?.score || 0) + 1,
+          },
+        }));
       }
     },
     setPlayers(player1, player2) {

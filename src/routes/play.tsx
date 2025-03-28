@@ -30,6 +30,8 @@ export const Route = createFileRoute("/play")({
 
 function RouteComponent() {
   const getPlayerName = useGameStore((state) => state.getPlayerName);
+  const player1Score = useGameStore((state) => state.player1?.score);
+  const player2Score = useGameStore((state) => state.player2?.score);
   const againstComputed = useGameStore(
     (state) => state.player2?.name === computer,
   );
@@ -81,6 +83,16 @@ function RouteComponent() {
         </div>
       </div>
       <ResultModal />
+      <div className="pointer-events-none fixed top-4 flex w-screen flex-row items-center justify-center p-5 max-md:inset-0 max-md:h-screen">
+        <div className="flex w-40 flex-row items-center overflow-clip rounded-full bg-white text-2xl font-bold text-white">
+          <span className="flex flex-1 justify-center bg-red-700/80">
+            {player1Score || 0}
+          </span>
+          <span className="flex flex-1 justify-center bg-blue-700/80">
+            {player2Score || 0}
+          </span>
+        </div>
+      </div>
       <div className="fixed bottom-5 left-5 flex gap-5">
         <Button asChild>
           <Link to="/">
