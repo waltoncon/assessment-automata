@@ -35,7 +35,7 @@ function RouteComponent() {
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
-            duration: 1.2,
+            duration: 0.2,
             ease: "easeInOut",
           }}
         >
@@ -102,7 +102,7 @@ function PlayMenu(props: MenuProps) {
       <Button
         disabled={!isPresent}
         size="lg"
-        variant="ghost"
+        variant="secondary"
         onClick={() => props.setMenu(undefined)}
       >
         BACK
