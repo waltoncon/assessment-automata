@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -63,6 +64,9 @@ export function PlayerSelectTwoModal({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>2 Players</DialogTitle>
+          <DialogDescription>
+            Use the keyboard shortcuts to hide your choice!
+          </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
