@@ -64,19 +64,24 @@ export function PlayerSelectOneModal({
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="player1"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Player 1 Name</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex flex-row items-start justify-between gap-3 max-md:flex-col max-md:items-center">
+              <FormField
+                control={form.control}
+                name="player1"
+                render={({ field }) => (
+                  <FormItem className="w-full flex-1">
+                    <FormControl>
+                      <Input {...field} placeholder="Player 1's name" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="py-1.5">VS</div>
+              <div className="w-full flex-1">
+                <Input readOnly value="The Computer" disabled />
+              </div>
+            </div>
             <Button type="submit">Play</Button>
           </form>
         </Form>
