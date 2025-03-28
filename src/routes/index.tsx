@@ -3,7 +3,7 @@ import { PlayerSelectOneModal } from "@/components/player-select-one-modal";
 import { PlayerSelectTwoModal } from "@/components/player-select-two-modal";
 import SettingsModal from "@/components/settings-modal";
 import { Button } from "@/components/ui/button";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion, useIsPresent } from "motion/react";
 import { useState } from "react";
 

@@ -8,19 +8,17 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useGameStore } from "@/utils/game-store";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { UseNavigateResult } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { Button } from "./ui/button";
-import { gameStore, useGameStore } from "@/utils/game-store";
-import { useNavigate, UseNavigateResult } from "@tanstack/react-router";
 
 const formSchema = z.object({
   player1: z.string().min(2, {
