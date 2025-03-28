@@ -13,12 +13,19 @@ import {
 } from "@/components/ui/tooltip";
 import { computer, useGameStore } from "@/utils/game-store";
 import { Hand, hands } from "@/utils/hand";
+import { Link, redirect } from "@tanstack/react-router";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { ComputerIcon } from "lucide-react";
+import { ComputerIcon, HomeIcon } from "lucide-react";
 import { useEffect } from "react";
 
 export const Route = createFileRoute("/play")({
   component: RouteComponent,
+  beforeLoad: () => {
+    const { player1, player2 } = useGameStore.getState();
+    if (!player1 || !player2) {
+      throw redirect({ to: "/" });
+    }
+  },
 });
 
 function RouteComponent() {
@@ -74,6 +81,13 @@ function RouteComponent() {
         </div>
       </div>
       <ResultModal />
+      <div className="fixed bottom-5 left-5 flex gap-5">
+        <Button asChild>
+          <Link to="/">
+            <HomeIcon />
+          </Link>
+        </Button>
+      </div>
     </main>
   );
 }
