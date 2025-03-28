@@ -1,4 +1,4 @@
-export type Hand = "rock" | "paper" | "scissors" | "lizard" | "spock";
+import { Hand } from "./hand";
 
 const winConditions: Record<Hand, Hand[]> = {
   rock: ["scissors", "lizard"],
