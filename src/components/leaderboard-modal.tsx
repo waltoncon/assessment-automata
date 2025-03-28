@@ -24,7 +24,7 @@ export default function LeaderboardModal() {
 
   return (
     <Dialog>
-      <Button size="lg" variant="ghost" asChild>
+      <Button size="lg" variant="secondary" asChild>
         <DialogTrigger>LEADERBOARD</DialogTrigger>
       </Button>
       <DialogContent aria-describedby={undefined}>

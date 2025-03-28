@@ -13,7 +13,7 @@ export default function SettingsModal() {
 
   return (
     <Dialog>
-      <Button size="lg" variant="ghost" asChild>
+      <Button size="lg" variant="secondary" asChild>
         <DialogTrigger>SETTINGS</DialogTrigger>
       </Button>
       <DialogContent>
