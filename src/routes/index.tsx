@@ -1,4 +1,7 @@
+import LeaderboardModal from "@/components/leaderboard-modal";
 import { PlayerSelectOneModal } from "@/components/player-select-one-modal";
+import { PlayerSelectTwoModal } from "@/components/player-select-two-modal";
+import SettingsModal from "@/components/settings-modal";
 import { Button } from "@/components/ui/button";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion, useIsPresent } from "motion/react";
@@ -14,7 +17,18 @@ function RouteComponent() {
   const [menu, setMenu] = useState<Menu>();
 
   return (
-    <main className="flex h-screen flex-col items-center justify-center gap-10">
+    <main
+      className="flex h-screen flex-col items-center justify-center gap-10"
+      style={{
+        background: `linear-gradient(
+          to right,
+          color-mix(in oklab, var(--color-red-700) 50%, transparent) 0%,
+          color-mix(in oklab, var(--color-red-700) 50%, transparent) 50%,
+          color-mix(in oklab, var(--color-blue-700) 50%, transparent) 50%,
+          color-mix(in oklab, var(--color-blue-700) 50%, transparent) 100%
+        )`,
+      }}
+    >
       <div className="p-10">
         <motion.h1
           className="text-center text-6xl font-bold"
@@ -54,7 +68,7 @@ function MainMenu(props: MenuProps) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
       transition={{ duration: 0.1 }}
-      className="flex flex-col gap-5"
+      className="flex w-40 flex-col gap-5"
     >
       <Button
         disabled={!isPresent}
@@ -66,12 +80,8 @@ function MainMenu(props: MenuProps) {
       >
         PLAY
       </Button>
-      <Button disabled={!isPresent} asChild size="lg" variant="secondary">
-        <Link to="/leaderboard">LEADERBOARD</Link>
-      </Button>
-      <Button disabled={!isPresent} asChild size="lg" variant="secondary">
-        <Link to="/settings">SETTINGS</Link>
-      </Button>
+      <LeaderboardModal />
+      <SettingsModal />
     </motion.div>
   );
 }
@@ -85,16 +95,14 @@ function PlayMenu(props: MenuProps) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
       transition={{ duration: 0.1 }}
-      className="flex flex-col gap-5"
+      className="flex w-40 flex-col gap-5"
     >
       <PlayerSelectOneModal disabled={!isPresent} navigate={navigate} />
-      <Button disabled={!isPresent} size="lg">
-        2 PLAYER
-      </Button>
+      <PlayerSelectTwoModal disabled={!isPresent} navigate={navigate} />
       <Button
         disabled={!isPresent}
         size="lg"
-        variant="secondary"
+        variant="ghost"
         onClick={() => props.setMenu(undefined)}
       >
         BACK
